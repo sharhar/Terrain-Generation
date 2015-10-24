@@ -1,4 +1,4 @@
-package game.blocks;
+package game.terrain;
 
 import org.lwjgl.util.vector.Vector2f;
 

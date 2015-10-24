@@ -7,13 +7,16 @@ import java.util.List;
 
 import org.lwjgl.opengl.Display;
 
-import game.blocks.Block;
+import game.terrain.Block;
 
 public class Renderer {
 	
 	public static List<Block> blocks = new ArrayList<Block>();
 	
 	public static void addBlock(Block b) {
+		if(b == null) {
+			return;
+		}
 		blocks.add(b);
 	}
 	
@@ -37,13 +40,13 @@ public class Renderer {
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(Block.texBlockSize.x * (b.texPos.x+1), Block.texBlockSize.y * (b.texPos.y+1));
-			glVertex2f(b.pos.x + Block.size.x/2, b.pos.y - Block.size.y/2);
+			glVertex2f(b.pos.x + Block.size.x/2 + 1, b.pos.y - Block.size.y/2);
 			
 			glTexCoord2f(Block.texBlockSize.x * (b.texPos.x+1), Block.texBlockSize.y * (b.texPos.y));
-			glVertex2f(b.pos.x + Block.size.x/2, b.pos.y + Block.size.y/2);
+			glVertex2f(b.pos.x + Block.size.x/2 + 1, b.pos.y + Block.size.y/2 + 1);
 			
 			glTexCoord2f(Block.texBlockSize.x * (b.texPos.x), Block.texBlockSize.y * (b.texPos.y));
-			glVertex2f(b.pos.x - Block.size.x/2, b.pos.y + Block.size.y/2);
+			glVertex2f(b.pos.x - Block.size.x/2, b.pos.y + Block.size.y/2 + 1);
 			
 			glTexCoord2f(Block.texBlockSize.x * (b.texPos.x), Block.texBlockSize.y * (b.texPos.y+1));
 			glVertex2f(b.pos.x - Block.size.x/2, b.pos.y - Block.size.y/2);
