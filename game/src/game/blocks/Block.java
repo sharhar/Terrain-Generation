@@ -5,13 +5,22 @@ import org.lwjgl.util.vector.Vector2f;
 public class Block {
 	
 	public Vector2f pos;
-	public int texture;
+	public Vector2f texPos;
+	public static Vector2f texSize;
+	public static Vector2f texBlockSize;
+	public static int texture;
 	public static Vector2f size = new Vector2f(50,50);
 	public static Vector2f playerPos = new Vector2f(0,0);
 	
-	public Block(Vector2f pos, int texture) {
+	public static void initTexture(int t, int x, int y) {
+		Block.texture = t;
+		texSize = new Vector2f(x, y);
+		texBlockSize = new Vector2f(1.0f/texSize.x, 1.0f/texSize.y);
+	}
+	
+	public Block(Vector2f pos, Vector2f texPos) {
 		this.pos= pos;
-		this.texture = texture;
+		this.texPos = texPos;
 	}
 	
 }

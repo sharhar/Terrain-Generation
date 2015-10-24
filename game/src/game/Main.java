@@ -6,6 +6,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector2f;
 
 import game.blocks.Block;
+import game.graphics.Renderer;
 import game.graphics.Texture;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -21,9 +22,10 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		Block b = new Block(new Vector2f(), new Texture("/test2.png").getID());
+		Block.initTexture(new Texture("/textures.png").getID(), 16, 16);
+		Block b = new Block(new Vector2f(), new Vector2f(3, 0));
 		
-		glClearColor(0, 0, 0, 1);
+		glClearColor(0.2f, 0.3f, 0.9f, 1);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, 800, 0, 600, -1, 1);
@@ -39,7 +41,9 @@ public class Main {
 		while(!Display.isCloseRequested()) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			
-			Renderer.renderBlock(b);
+			Renderer.addBlock(b);
+			
+			Renderer.renderBatch();
 			
 			Display.update();
 		}
