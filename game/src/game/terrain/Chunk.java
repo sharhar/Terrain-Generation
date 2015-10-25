@@ -9,30 +9,36 @@ public class Chunk {
 	
 	public Block[][] blocks;
 	public int x;
+	public float worldX;
 	public int[] heightMap;
 	public static int WIDTH = 16;
 	public static int HEIGHT = 256; 
 	public static int MIDDLE = 96;
 	
 	public static final float SPREAD = 100;
+	public static final float CAVE_SPREAD = 10;
 	public static final float AMPLIFY = 50f;
 	
 	public Chunk(int x) {
 		heightMap = new int[WIDTH];
 		
 		for(int i =0;i < WIDTH; i++) {
-			heightMap[i] = (int) Math.floor(Main.noise.eval((i / SPREAD), 0) * AMPLIFY);
+			heightMap[i] = (int) Math.floor(Main.noise.eval(((i+(x*WIDTH)) / SPREAD), 0) * AMPLIFY);
 		}
 		
 		blocks = new Block[WIDTH][HEIGHT];
 		
 		for(int i = 0;i < WIDTH;i++) {
 			for(int j = 0;j < HEIGHT;j++) {
-				if(j- MIDDLE <= heightMap[i]) {
-					blocks[i][j] = new Block(new Vector2f(x + i, j - MIDDLE), new Vector2f(i,j));
+				float noise = (float) Main.noise.eval(((i+(x*WIDTH)) / CAVE_SPREAD), (j - MIDDLE)/CAVE_SPREAD);
+				if(j- MIDDLE <= heightMap[i] && noise < 0.3) {
+					blocks[i][j] = new Block(new Vector2f((x*WIDTH) + i, j - MIDDLE), new Vector2f(10, 10));
 				}
 			}
 		}
+		
+		this.x = x;
+		this.worldX = (x*WIDTH) - 0.1f;
 	}
 	
 	public void render() {

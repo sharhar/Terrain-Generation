@@ -11,6 +11,10 @@ public class Block {
 	public static int texture;
 	public static Vector2f size = new Vector2f(50,50);
 	public static Vector2f playerPos = new Vector2f(0,0);
+	public float r = 1;
+	public float g = 1;
+	public float b = 1;
+	
 	
 	public static void initTexture(int t, int x, int y) {
 		Block.texture = t;
