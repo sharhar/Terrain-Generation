@@ -1,8 +1,5 @@
 package game.uitls;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -13,17 +10,25 @@ import game.terrain.Chunk;
 
 public class Collider {
 	
-	public static int getCurrentChunk() {
-		int index = -1;
+	public static Vector2f getCurrentChunks() {
+		int index1 = -1;
+		int index2 = -1;
 		
 		for(int i =0;i < Main.chunks.length;i++) {
 			float x = Main.chunks[i].worldX;
 			if(Block.playerPos.x > x) {
-				index = i;
+				index1 = i;
 			}
 		}
 		
-		return index;
+		for(int i =0;i < Main.chunks.length;i++) {
+			float x = Main.chunks[i].worldX;
+			if(Block.playerPos.x + 16 > x) {
+				index2 = i;
+			}
+		}
+		
+		return new Vector2f(index1, index2);
 	}
 	
 	public static boolean rectRectCol(Vector2f pos1, Vector2f size1, Vector2f pos2, Vector2f size2) {
@@ -57,34 +62,39 @@ public class Collider {
 		return rectRectCol(p1, s1, p2, s2);
 	}
 	
-	public static boolean isHittingChunk(int index) {
-		if(index == -1) {
+	public static boolean isHittingChunk(Vector2f indexs) {
+		if(indexs.x == -1 || indexs.y == -1) {
 			return false;
 		}
 		
-		Chunk c = Main.chunks[index];
+		int index1 = (int) (indexs.x);
+		int index2 = (int) (indexs.y);
 		
-		List<Block> blocks = new ArrayList<Block>();
+		Chunk c = Main.chunks[index1];
 		
 		for(Block[] ba:c.blocks) {
 			for(Block b: ba) {
 				if(b != null) {
 					if(Maths.inRange(Block.playerPos, b.pos)) {
-						b.r = 0;
-						//if(isHittingBlock(b)) {
-						//	return true;
-						//}
-						blocks.add(b);
-					} else {
-						b.r = 1;
+						if(isHittingBlock(b)) {
+							return true;
+						}
 					}
 				}
 			}
 		}
 		
-		for(Block b:blocks) {
-			if(isHittingBlock(b)) {
-				return true;
+		c = Main.chunks[index2];
+		
+		for(Block[] ba:c.blocks) {
+			for(Block b: ba) {
+				if(b != null) {
+					if(Maths.inRange(Block.playerPos, b.pos)) {
+						if(isHittingBlock(b)) {
+							return true;
+						}
+					}
+				}
 			}
 		}
 		

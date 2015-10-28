@@ -38,7 +38,7 @@ public class Chunk {
 		}
 		
 		this.x = x;
-		this.worldX = (x*WIDTH) - 0.1f;
+		this.worldX = (x*WIDTH) + 1f;
 	}
 	
 	public void render() {

@@ -6,14 +6,9 @@ public class Maths {
 	
 	
 	public static boolean inRange(Vector2f p1, Vector2f p2) {
-		float distance = 6;
+		float distance = 4;
 		
-		boolean inX = p2.x <= p1.x+distance && p2.x >= p1.x-distance;
-		boolean inY = p2.y <= p1.y+distance && p2.y >= p1.y-distance;
-		
-		
-		return inX && inY;
-		//return distance(p1, p2) <= distance;
+		return distance(p1, p2) <= distance;
 	}
 	
 	public static float distance(Vector2f p1, Vector2f p2) {

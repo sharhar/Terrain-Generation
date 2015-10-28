@@ -67,7 +67,7 @@ public class Main {
 			
 			Player.tick();
 			
-			col = Collider.isHittingChunk(Collider.getCurrentChunk());
+			col = Collider.isHittingChunk(Collider.getCurrentChunks());
 			
 			Renderer.renderBatch();
 			Renderer.renderPlayer();
