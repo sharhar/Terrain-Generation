@@ -63,7 +63,7 @@ public class Main {
 			
 			for(Chunk c:chunks) {
 				c.render();
-			}
+			} 
 			
 			Player.tick();
 			
