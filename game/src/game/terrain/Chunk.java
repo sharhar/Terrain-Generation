@@ -31,8 +31,8 @@ public class Chunk {
 		for(int i = 0;i < WIDTH;i++) {
 			for(int j = 0;j < HEIGHT;j++) {
 				float noise = (float) Main.noise.eval(((i+(x*WIDTH)) / CAVE_SPREAD), (j - MIDDLE)/CAVE_SPREAD);
-				if(j- MIDDLE <= heightMap[i] && noise < 0.3) {
-					blocks[i][j] = new Block(new Vector2f((x*WIDTH) + i, j - MIDDLE), new Vector2f(10, 10));
+				if(j- MIDDLE <= heightMap[i] && noise < 0.5) {
+					blocks[i][j] = new Block(new Vector2f((x*WIDTH) + i, j - MIDDLE), heightMap[i]);
 				}
 			}
 		}

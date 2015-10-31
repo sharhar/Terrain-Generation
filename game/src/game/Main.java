@@ -33,7 +33,7 @@ public class Main {
 		Block.initTexture(new Texture("/textures.png").getID(), 16, 16);
 		//Chunk chunk = new Chunk(0);
 		
-		chunks = new Chunk[10];
+		chunks = new Chunk[12];
 		chunks[0] = new Chunk(0);
 		chunks[1] = new Chunk(1);
 		chunks[2] = new Chunk(2);
@@ -44,6 +44,8 @@ public class Main {
 		chunks[7] = new Chunk(7);
 		chunks[8] = new Chunk(8);
 		chunks[9] = new Chunk(9);
+		chunks[10] = new Chunk(10);
+		chunks[11] = new Chunk(11);
 		
 		glClearColor(0.2f, 0.3f, 0.9f, 1);
 		glMatrixMode(GL_PROJECTION);
@@ -73,7 +75,7 @@ public class Main {
 			Renderer.renderPlayer();
 			
 			Display.update();
-			Display.sync(120);
+			Display.sync(9999);
 		}
 		
 		Display.destroy();

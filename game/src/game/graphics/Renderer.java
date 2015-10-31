@@ -16,7 +16,7 @@ public class Renderer {
 	public static List<Block> blocks = new ArrayList<Block>();
 	
 	public static void addBlock(Block b) {
-		if(b == null) {
+		if(b == null || !b.inScreen()) {
 			return;
 		}
 		blocks.add(b);
