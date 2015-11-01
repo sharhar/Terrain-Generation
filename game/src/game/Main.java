@@ -6,10 +6,12 @@ import org.lwjgl.opengl.DisplayMode;
 
 import game.graphics.Renderer;
 import game.graphics.Texture;
+import game.input.KeyInput;
 import game.terrain.Block;
 import game.terrain.Chunk;
 import game.uitls.Collider;
 import game.uitls.OpenSimplexNoise;
+import game.uitls.Time;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -59,9 +61,12 @@ public class Main {
 		
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
-		
+		Time.init();
 		while(!Display.isCloseRequested()) {
 			glClear(GL_COLOR_BUFFER_BIT);
+			
+			Time.tick();
+			KeyInput.update();
 			
 			for(Chunk c:chunks) {
 				c.render();
@@ -75,7 +80,7 @@ public class Main {
 			Renderer.renderPlayer();
 			
 			Display.update();
-			Display.sync(9999);
+			Display.sync(120);
 		}
 		
 		Display.destroy();

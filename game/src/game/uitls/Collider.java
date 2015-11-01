@@ -63,39 +63,46 @@ public class Collider {
 	}
 	
 	public static boolean isHittingChunk(Vector2f indexs) {
-		if(indexs.x == -1 || indexs.y == -1) {
+		if(indexs.x == -1 && indexs.y == -1) {
 			return false;
 		}
 		
 		int index1 = (int) (indexs.x);
 		int index2 = (int) (indexs.y);
 		
-		Chunk c = Main.chunks[index1];
+		Chunk c = null;
 		
-		for(Block[] ba:c.blocks) {
-			for(Block b: ba) {
-				if(b != null) {
-					if(Maths.inRange(Block.playerPos, b.pos)) {
-						if(isHittingBlock(b)) {
-							return true;
+		if(index1 != -1) {
+			c = Main.chunks[index1];
+			
+			for(Block[] ba:c.blocks) {
+				for(Block b: ba) {
+					if(b != null) {
+						if(Maths.inRange(Block.playerPos, b.pos)) {
+							if(isHittingBlock(b)) {
+								return true;
+							}
 						}
 					}
 				}
 			}
 		}
 		
-		c = Main.chunks[index2];
-		
-		for(Block[] ba:c.blocks) {
-			for(Block b: ba) {
-				if(b != null) {
-					if(Maths.inRange(Block.playerPos, b.pos)) {
-						if(isHittingBlock(b)) {
-							return true;
+		if(index2 != -1) {
+			c = Main.chunks[index2];
+			
+			for(Block[] ba:c.blocks) {
+				for(Block b: ba) {
+					if(b != null) {
+						if(Maths.inRange(Block.playerPos, b.pos)) {
+							if(isHittingBlock(b)) {
+								return true;
+							}
 						}
 					}
 				}
 			}
+		
 		}
 		
 		return false;
